@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import time
 
 n = int(input('Ile jest niewiadomowych? '))
 a = np.zeros((n, n + 1))
