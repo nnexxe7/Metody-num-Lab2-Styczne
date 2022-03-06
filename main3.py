@@ -1,34 +1,35 @@
-import numpy as np
-import sys
-import time
+# Defining Function
+def f(x):
+    return x**3-x-4.5
 
-n = int(input('Ile jest niewiadomowych? '))
-a = np.zeros((n, n + 1))
-x = np.zeros(n)
-print('Wprowadź współczynniki macierzy: ')
-for i in range(n):
-    for j in range(n + 1):
-        a[i][j] = float(input('a[' + str(i) + '][' + str(j) + ']='))
-for i in range(n):
-    if a[i][i] == 0.0:
-        sys.exit('Wykryto dzielenie przez 0')
+def bisection(x0, x1, e):
+    step = 1
+    print('\n\n*** Metoda bisekcji implementacja ***')
+    condition = True
+    while condition:
+        x2 = (x0 + x1) / 2
+        print('Iteracja-%d, x2 = %0.6f i f(x2) = %0.6f' % (step, x2, f(x2)))
 
-    for j in range(i + 1, n):
-        ratio = a[j][i] / a[i][i]
+        if f(x0) * f(x2) < 0:
+            x1 = x2
+        else:
+            x0 = x2
 
-        for k in range(n + 1):
-            a[j][k] = a[j][k] - ratio * a[i][k]
+        step = step + 1
+        condition = abs(f(x2)) > e
 
-x[n - 1] = a[n - 1][n] / a[n - 1][n - 1]
+    print('\nWynik to : %0.8f' % x2)
 
-for i in range(n - 2, -1, -1):
-    x[i] = a[i][n]
+x0 = input('Pierwszy strzal: ')
+x1 = input('Drugi strzal: ')
+e = input('Epsilon: ')
 
-    for j in range(i + 1, n):
-        x[i] = x[i] - a[i][j] * x[j]
+x0 = float(x0)
+x1 = float(x1)
+e = float(e)
 
-    x[i] = x[i] / a[i][i]
-
-print('\nWynik to: ')
-for i in range(n):
-    print('X%d = %0.6f' % (i, x[i]), end='\t')
+if f(x0) * f(x1) > 0.0:
+    print('Z tych wartosci nie da sie obliczyc bisekcji')
+    print('Sprobuj z innymi wartosciami')
+else:
+    bisection(x0, x1, e)
