@@ -11,7 +11,7 @@ def newton(f,Df,x0,epsilon,max_iter):
             print('Znaleziono dzielenie przez zero. Nie znaleziono rozwiązania')
             return None
         xn = xn - fxn/Dfxn
-    print('Przekroczono maksymalną liczbę iteracji. Nie znaleziono rozwiązania.')
+    print('Przekroczono maksymalną liczbę iteracji. Nie znaleziono rozwiązania')
     return None
 
 p = lambda x: x**3-x-4.5
